@@ -1,30 +1,16 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
+# MatchMusic
 
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
-
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: 37<br>
+**Conteúdo da Disciplina**: Dividir e Conquistar<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 22/1021975  |  Gabriel Santos Monteiro |
+| 22/1037975  |  Natália Rodrigues de Morais |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Este projeto visa criar uma aplicação capaz de fazer match de gostos musicais entre duas pessoas diferentes e criar uma nova playlist com o gosto dos dois utilizando os conceitos de Dividir e Conquistar estudados na disciplina de Projeto de Algoritmo. 
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.
