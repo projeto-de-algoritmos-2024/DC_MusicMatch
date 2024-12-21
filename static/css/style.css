@@ -1,0 +1,235 @@
+.match-card {
+    background: rgba(29, 185, 84, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.playlist-input {
+    margin: 15px 0;
+}
+
+.info-container {
+    background: rgba(4, 2, 88);
+    backdrop-filter: blur(10px);
+    height: 100%;
+}
+
+.info-content {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.info-container h1 {
+    font-size: 2.5em;
+    color: white;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.info-content h2 {
+    color: #1DB954;
+    font-size: 1.8em;
+    margin: 1.5rem 0 1rem 0;
+}
+
+.info-content p {
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.info-content ul {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.info-content li {
+    color: white;
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.info-content li:before {
+    content: "•";
+    color: #1DB954;
+    position: absolute;
+    left: 0;
+}
+
+.title{
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.back-button {
+    display: inline-block;
+    background: rgba(29, 185, 84, 0.8);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-top: 1px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.05);
+    background: rgba(29, 185, 84, 1);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: rgb(0, 0, 0);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bg {
+    background: url(https://i.ibb.co/87GbbFP/2799006.jpg) no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -3;
+}
+
+.bg:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+@keyframes sf-fly-by-1 {
+    from {
+        transform: translateZ(-600px);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateZ(0);
+        opacity: 0.5;
+    }
+}
+
+@keyframes sf-fly-by-2 {
+    from {
+        transform: translateZ(-1200px);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateZ(-600px);
+        opacity: 0.5;
+    }
+}
+
+@keyframes sf-fly-by-3 {
+    from {
+        transform: translateZ(-1800px);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateZ(-1200px);
+        opacity: 0.5;
+    }
+}
+
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 600px;
+    -webkit-perspective: 600px;
+    z-index: -1;
+}
+
+.star-field .layer {
+    box-shadow: -411px -476px #cccccc, 777px -407px #d4d4d4, -387px -477px #fcfcfc, -91px -235px #d4d4d4, 491px -460px #f7f7f7, 892px -128px #f7f7f7, 758px -277px #ededed, 596px 378px #cccccc, 647px 423px whitesmoke, 183px 389px #c7c7c7,
+        524px -237px #f0f0f0, 679px -535px #e3e3e3, 158px 399px #ededed, 157px 249px #ededed, 81px -450px #ebebeb, 719px -360px #c2c2c2, -499px 473px #e8e8e8, -158px -349px #d4d4d4, 870px -134px #cfcfcf, 446px 404px #c2c2c2;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 4px;
+    width: 4px;
+    border-radius: 2px;
+}
+
+.star-field .layer:nth-child(1) {
+    animation: sf-fly-by-1 5s linear infinite;
+}
+
+.star-field .layer:nth-child(2) {
+    animation: sf-fly-by-2 5s linear infinite;
+}
+
+.star-field .layer:nth-child(3) {
+    animation: sf-fly-by-3 5s linear infinite;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.menu-button {
+    background: rgba(29, 185, 84, 0.8);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    margin: 1rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.menu-button:hover {
+    transform: scale(1.05);
+    background: rgba(29, 185, 84, 1);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 30vh;
+    text-align: center;
+}
+
+.logo h1 {
+    font-size: 4em;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-button {
+    min-width: 200px;
+}
