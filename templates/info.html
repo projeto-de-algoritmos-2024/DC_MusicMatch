@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Informações - Music Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+        <div class="info-container">
+            <h1>Sobre o Music Match</h1>
+            
+            <div class="info-content">
+                <h2>Como Funciona</h2>
+                <p>O Music Match utiliza algoritmos avançados de correspondência musical para encontrar similaridades entre playlists de diferentes usuários.</p>
+                
+                <h2>Recursos</h2>
+                <ul>
+                    <li>Criação de matches musicais personalizados</li>
+                    <li>Análise de similaridade entre playlists</li>
+                    <li>Compartilhamento fácil via links</li>
+                    <li>Interface intuitiva e moderna</li>
+                </ul>
+            </div>
+            
+            <a href="{{ url_for('home') }}" class="back-button">Voltar ao Menu</a>
+        </div>
+</body>
+</html>

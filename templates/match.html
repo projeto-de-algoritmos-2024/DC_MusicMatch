@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ver Matches - Music Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+        <div class="matches-container">
+            <h1>Seus Matches</h1>
+            {% if matches %}
+                {% for match in matches %}
+                    <div class="match-card">
+                        <h3>{{ match.name }}</h3>
+                        <p>Similaridade: {{ match.similarity }}%</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum match encontrado</p>
+            {% endif %}
+            <a href="{{ url_for('home') }}" class="back-button">Voltar ao Menu</a>
+        </div>
+</body>
+</html>
