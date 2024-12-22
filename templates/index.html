@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="star-field">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+    </div>
+
+        <div class="container">
+            <div class="title">
+                <h1>Music Match</h1>
+            </div>
+            
+            <div class="menu">
+                <a href="{{ url_for('create_match') }}" class="menu-button">Criar Match</a>
+                <a href="{{ url_for('view_matches') }}" class="menu-button">Ver Matches</a>
+                <a href="{{ url_for('info') }}" class="menu-button">Informações</a>
+            </div>
+        </div>
+    <script src="{{ url_for('static', filename='js/match.js') }}"></script>
+</body>
+</html>
