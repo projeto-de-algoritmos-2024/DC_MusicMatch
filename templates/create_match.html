@@ -1,0 +1,51 @@
+<!-- templates/create_match.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criar Match - Music Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="star-field">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+    </div>
+    
+    <div class="info-container">
+        <h1 class="title">Criar Novo Match</h1>
+        <div class="match-form">
+            <div class="playlist-input">
+                <label>Sua Playlist</label>
+                <input type="text" id="playlist1" required>
+            </div>
+            <button onclick="createMatch()" class="menu-button">Criar Match</button>
+            <div id="share-link"></div>
+        </div>
+        <a href="{{ url_for('home') }}" class="back-button">Voltar</a>
+    </div>
+
+    <script>
+        function createMatch() {
+            const playlist1 = document.getElementById('playlist1').value;
+            fetch('/process_match', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    playlist1: playlist1.split(',')
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('share-link').innerHTML = 
+                        `Link para compartilhar: ${window.location.origin}/join/${data.match_id}`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

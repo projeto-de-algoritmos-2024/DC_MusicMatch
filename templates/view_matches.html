@@ -1,3 +1,4 @@
+<!-- templates/view_matches.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,19 +6,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-        <div class="matches-container">
-            <h1>Seus Matches</h1>
+    <div class="bg"></div>
+    <div class="star-field">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+    </div>
+
+    <div class="info-container">
+        <h1 class="title">Seus Matches</h1>
+        <div class="matches-grid">
             {% if matches %}
                 {% for match in matches %}
                     <div class="match-card">
                         <h3>{{ match.name }}</h3>
-                        <p>Similaridade: {{ match.similarity }}%</p>
+                        <p>Similaridade: {{ "%.2f"|format(match.similarity * 100) }}%</p>
                     </div>
                 {% endfor %}
             {% else %}
                 <p>Nenhum match encontrado</p>
             {% endif %}
-            <a href="{{ url_for('home') }}" class="back-button">Voltar</a>
         </div>
+        <a href="{{ url_for('home') }}" class="back-button">Voltar</a>
+    </div>
 </body>
 </html>
