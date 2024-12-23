@@ -1,0 +1,42 @@
+<!-- templates/match_result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado do Match - Music Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="star-field">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+    </div>
+
+    <div class="info-container">
+        <h1 class="title">Resultado do Match</h1>
+        
+        <div class="result-content">
+            <div class="similarity-score">
+                <h2>Compatibilidade Musical</h2>
+                <div class="score-circle">
+                    {{ similarity_percentage }}%
+                </div>
+            </div>
+
+            <div class="common-tracks">
+                <h3>Músicas em Comum</h3>
+                <div class="tracks-list">
+                    {% for track in common_tracks %}
+                    <div class="track-item">
+                        {{ track.name }} - {{ track.artist }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('home') }}" class="back-button">Voltar ao Início</a>
+    </div>
+</body>
+</html>

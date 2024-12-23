@@ -39,6 +39,8 @@
     </div>
 
     <script>
+        const matchId = "{{ match_id }}";
+        const isSecondUser = "{{ is_second_user|default('false')|string }}" === "true";
         let selectedTracks = [];
 
         function searchSpotify() {
@@ -112,21 +114,27 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    songs: selectedTracks
+                    match_id: matchId,
+                    songs: selectedTracks,
+                    is_second_user: isSecondUser
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    document.getElementById('share-link').innerHTML = `
-                        <p>Compartilhe este link com seu amigo:</p>
-                        <div class="share-link-box">
-                            <input type="text" readonly value="${data.share_link}">
-                            <button onclick="copyLink('${data.share_link}')" class="copy-button">
-                                Copiar
-                            </button>
-                        </div>
-                    `;
+                    if (isSecondUser) {
+                        window.location.href = `/match_result/${matchId}`;
+                    } else {
+                        document.getElementById('share-link').innerHTML = `
+                            <p>Compartilhe este link com seu amigo:</p>
+                            <div class="share-link-box">
+                                <input type="text" readonly value="${data.share_link}">
+                                <button onclick="copyLink('${data.share_link}')" class="copy-button">
+                                    Copiar
+                                </button>
+                            </div>
+                        `;
+                    }
                 }
             });
         }
