@@ -1,4 +1,3 @@
-<!-- templates/create_playlist.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +24,15 @@
             <div id="search-results" class="search-results"></div>
             
             <div class="selected-songs">
-                <h3>Músicas Selecionadas</h3>
+                <h3>Músicas Selecionadas (<span id="track-count">0</span>/10)</h3>
                 <div id="selected-tracks"></div>
             </div>
+
+            <button onclick="finalizePlaylist()" class="menu-button" id="finalize-button" disabled>
+                Finalizar Playlist
+            </button>
+
+            <div id="share-link" class="share-section"></div>
         </div>
         
         <a href="{{ url_for('home') }}" class="back-button">Voltar</a>
@@ -58,20 +63,24 @@
             resultsDiv.innerHTML = tracks.map(track => `
                 <div class="track-item">
                     <span>${track.name} - ${track.artist}</span>
-                    <button onclick='addTrack(${JSON.stringify(track)})' class="add-button">+</button>
+                    <button onclick='addTrack(${JSON.stringify(track)})' class="add-button" 
+                            ${selectedTracks.length >= 10 ? 'disabled' : ''}>+</button>
                 </div>
             `).join('');
         }
 
         function addTrack(track) {
-            if (!selectedTracks.find(t => t.id === track.id)) {
+            if (!selectedTracks.find(t => t.id === track.id) && selectedTracks.length < 10) {
                 selectedTracks.push(track);
                 updateSelectedTracks();
+                updateFinalizeButton();
             }
         }
 
         function updateSelectedTracks() {
             const selectedDiv = document.getElementById('selected-tracks');
+            document.getElementById('track-count').textContent = selectedTracks.length;
+            
             selectedDiv.innerHTML = selectedTracks.map(track => `
                 <div class="selected-track">
                     <span>${track.name} - ${track.artist}</span>
@@ -83,6 +92,48 @@
         function removeTrack(trackId) {
             selectedTracks = selectedTracks.filter(track => track.id !== trackId);
             updateSelectedTracks();
+            updateFinalizeButton();
+        }
+
+        function updateFinalizeButton() {
+            const finalizeButton = document.getElementById('finalize-button');
+            finalizeButton.disabled = selectedTracks.length < 5;
+        }
+
+        function finalizePlaylist() {
+            if (selectedTracks.length < 5) {
+                alert('Selecione pelo menos 5 músicas');
+                return;
+            }
+
+            fetch('/finalize_playlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    songs: selectedTracks
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('share-link').innerHTML = `
+                        <p>Compartilhe este link com seu amigo:</p>
+                        <div class="share-link-box">
+                            <input type="text" readonly value="${data.share_link}">
+                            <button onclick="copyLink('${data.share_link}')" class="copy-button">
+                                Copiar
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function copyLink(link) {
+            navigator.clipboard.writeText(link);
+            alert('Link copiado!');
         }
     </script>
 </body>

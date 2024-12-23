@@ -307,3 +307,31 @@ body {
 .remove-button {
     background: rgba(255, 0, 0, 0.8);
 }
+
+/* Adicionar ao style.css */
+.share-link-box {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.share-link-box input {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.copy-button {
+    background: rgba(29, 185, 84, 0.8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}

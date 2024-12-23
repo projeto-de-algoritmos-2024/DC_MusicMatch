@@ -70,6 +70,29 @@ def search_tracks():
     tracks = spotify_manager.search_tracks(query)
     return jsonify({'tracks': tracks})
 
+@app.route('/join/<match_id>')
+def join_match(match_id):
+    match = match_manager.get_match(match_id)
+    if not match:
+        return "Match não encontrado", 404
+    return render_template('create_playlist.html', match_id=match_id)
+
+@app.route('/finalize_playlist', methods=['POST'])
+def finalize_playlist():
+    data = request.json
+    match_id = str(uuid.uuid4())
+    playlist = data.get('songs', [])
+    
+    try:
+        match_manager.save_playlist(match_id, playlist)
+        share_link = request.host_url + 'join/' + match_id
+        return jsonify({
+            'status': 'success',
+            'share_link': share_link
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
