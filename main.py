@@ -22,8 +22,9 @@ def create_match():
 
 @app.route('/view_matches')
 def view_matches():
-    matches = match_manager.get_all_matches()
-    return render_template('view_matches.html', matches=matches)  # Template específico
+    matches = match_manager.get_all_matches()  # Obter todos os matches
+    return render_template('view_matches.html', matches=matches)  # Usar template correto
+
 
 
 @app.route('/info')

@@ -1,10 +1,25 @@
 from .models.match import Match
 import uuid
-import datetime
+from datetime import datetime
 
 class MatchManager:
     def __init__(self):
         self.matches = {}
+        
+    def get_all_matches(self):
+        """
+        Retorna todos os matches ordenados por data de criação
+        """
+        matches_list = []
+        for match_id, match_data in self.matches.items():
+            if match_data.get('playlist1') and match_data.get('playlist2'):
+                matches_list.append({
+                    'id': match_id,
+                    'name': f"Match #{match_id[:8]}",
+                    'similarity': match_data.get('similarity', 0),
+                    'created_at': match_data.get('created_at', datetime.now())
+                })
+        return sorted(matches_list, key=lambda x: x['created_at'], reverse=True)
 
     def create_match(self, playlist1, playlist2):
         if not playlist1 or not playlist2:

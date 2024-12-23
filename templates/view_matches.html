@@ -1,4 +1,3 @@
-<!-- templates/view_matches.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +14,22 @@
 
     <div class="info-container">
         <h1 class="title">Seus Matches</h1>
+        
         <div class="matches-grid">
             {% if matches %}
                 {% for match in matches %}
                     <div class="match-card">
                         <h3>{{ match.name }}</h3>
                         <p>Similaridade: {{ "%.2f"|format(match.similarity * 100) }}%</p>
+                        <p>Criado em: {{ match.created_at.strftime('%d/%m/%Y') }}</p>
                     </div>
                 {% endfor %}
             {% else %}
-                <p>Nenhum match encontrado</p>
+                <p class="no-matches">Nenhum match encontrado</p>
             {% endif %}
         </div>
-        <a href="{{ url_for('home') }}" class="back-button">Voltar</a>
+        
+        <a href="{{ url_for('home') }}" class="back-button">Voltar ao Menu</a>
     </div>
 </body>
 </html>
