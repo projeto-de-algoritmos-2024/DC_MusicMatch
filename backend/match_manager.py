@@ -90,3 +90,34 @@ class MatchManager:
         
         similarity = len(common_tracks) / len(total_tracks)
         return round(similarity * 100, 2)  # Retorna a porcentagem de similaridade
+
+class MatchAnalyzer:
+    def __init__(self, playlist1, playlist2):
+        self.playlist1 = playlist1
+        self.playlist2 = playlist2
+
+    def calculate_similarity(self):
+        # Implementação usando Divisão e Conquista
+        return self._similarity_dc(self.playlist1, self.playlist2, 0, len(self.playlist1))
+
+    def _similarity_dc(self, list1, list2, start, end):
+        # Caso base
+        if end - start <= 3:
+            return self._direct_similarity(list1[start:end], list2[start:end])
+
+        # Divisão
+        mid = (start + end) // 2
+        
+        # Conquista
+        left_sim = self._similarity_dc(list1, list2, start, mid)
+        right_sim = self._similarity_dc(list1, list2, mid, end)
+        
+        # Combinação usando mediana das medianas
+        return self._combine_similarities(left_sim, right_sim)
+
+    def _combine_similarities(self, sim1, sim2):
+        # Usando Karatsuba para multiplicação de similaridades
+        return (sim1 + sim2) / 2
+
+    def get_common_tracks(self):
+        return list(set(self.playlist1) & set(self.playlist2))

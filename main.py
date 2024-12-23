@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, jsonify
 from backend.match_manager import MatchManager
 from backend.user_manager import UserManager
 import uuid
-from backend.spotify_manager import SpotifyManager  # Nova importação
+from backend.spotify_manager import SpotifyManager
+from backend.match_manager import MatchManager, MatchAnalyzer
+
 
 app = Flask(__name__)
 match_manager = MatchManager()
@@ -69,6 +71,58 @@ def search_tracks():
     query = data.get('query', '')
     tracks = spotify_manager.search_tracks(query)
     return jsonify({'tracks': tracks})
+
+@app.route('/join/<match_id>')
+def join_match(match_id):
+    match = match_manager.get_match(match_id)
+    if not match:
+        # Se não encontrar o match, criar um novo
+        match = {
+            'id': match_id,
+            'playlist1': None,
+            'playlist2': None,
+            'status': 'pending'
+        }
+        match_manager.matches[match_id] = match
+    
+    # Verifica se já tem duas playlists
+    if match.get('playlist2'):
+        return "Este match já está completo", 400
+        
+    return render_template('create_playlist.html', 
+                         match_id=match_id, 
+                         is_second_user=bool(match.get('playlist1')))
+
+
+@app.route('/finalize_playlist', methods=['POST'])
+def finalize_playlist():
+    data = request.json
+    match_id = str(uuid.uuid4())
+    playlist = data.get('songs', [])
+    
+    try:
+        match_manager.save_playlist(match_id, playlist)
+        share_link = request.host_url + 'join/' + match_id
+        return jsonify({
+            'status': 'success',
+            'share_link': share_link
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+@app.route('/match_result/<match_id>')
+def match_result(match_id):
+    match = match_manager.get_match(match_id)
+    if not match:
+        return "Match não encontrado", 404
+
+    analyzer = MatchAnalyzer(match['playlist1'], match['playlist2'])
+    similarity = analyzer.calculate_similarity()
+    common_tracks = analyzer.get_common_tracks()
+
+    return render_template('match_result.html',
+                         similarity_percentage=int(similarity * 100),
+                         common_tracks=common_tracks)
 
 
 if __name__ == '__main__':
