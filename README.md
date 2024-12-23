@@ -15,15 +15,15 @@ Este projeto visa criar uma aplicação web que permite fazer match de gostos mu
 
 | Tela de Introdução                         | Tela de Procurar Música                           |
 | ------------------------------------------ | ------------------------------------------ |
-| ![Intro](/DC_MusicMatch/static/img/inicio.png)                    | ![Search](/DC_MusicMatch/static/img/procurar.png)                      |
+| ![Intro](./static/img/inicio.png)                    | ![Search](./static/img/procurar.png)                      |
 
 | Tela de Informações                     | Tela de Fim de Jogo                        |
 | ------------------------------------------ | ------------------------------------------ |
-| ![Infos](/DC_MusicMatch/static/img/infos.png)                    | ![Select](/DC_MusicMatch/static/img/selecionar.png)                        |
+| ![Infos](/./static/img/infos.png)                    | ![Select](./static/img/selecionar.png)                        |
 
 | Tela de Matches                     |
 | ------------------------------------------ |
-| ![Infos](/DC_MusicMatch/static/img/matches.png)                    |
+| ![Infos](./static/img/matches.png)                    |
 
 
 ## Instalação 
