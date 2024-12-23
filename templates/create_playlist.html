@@ -1,0 +1,89 @@
+<!-- templates/create_playlist.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criar Playlist - Music Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="star-field">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+    </div>
+
+    <div class="info-container">
+        <h1 class="title">Criar Playlist</h1>
+        
+        <div class="playlist-form">
+            <div class="search-section">
+                <input type="text" id="search" placeholder="Buscar música no Spotify">
+                <button onclick="searchSpotify()" class="menu-button">Buscar</button>
+            </div>
+            
+            <div id="search-results" class="search-results"></div>
+            
+            <div class="selected-songs">
+                <h3>Músicas Selecionadas</h3>
+                <div id="selected-tracks"></div>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('home') }}" class="back-button">Voltar</a>
+    </div>
+
+    <script>
+        let selectedTracks = [];
+
+        function searchSpotify() {
+            const query = document.getElementById('search').value;
+            if (!query) return;
+
+            fetch('/search_tracks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: query })
+            })
+            .then(response => response.json())
+            .then(data => {
+                displaySearchResults(data.tracks);
+            });
+        }
+
+        function displaySearchResults(tracks) {
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = tracks.map(track => `
+                <div class="track-item">
+                    <span>${track.name} - ${track.artist}</span>
+                    <button onclick='addTrack(${JSON.stringify(track)})' class="add-button">+</button>
+                </div>
+            `).join('');
+        }
+
+        function addTrack(track) {
+            if (!selectedTracks.find(t => t.id === track.id)) {
+                selectedTracks.push(track);
+                updateSelectedTracks();
+            }
+        }
+
+        function updateSelectedTracks() {
+            const selectedDiv = document.getElementById('selected-tracks');
+            selectedDiv.innerHTML = selectedTracks.map(track => `
+                <div class="selected-track">
+                    <span>${track.name} - ${track.artist}</span>
+                    <button onclick="removeTrack('${track.id}')" class="remove-button">×</button>
+                </div>
+            `).join('');
+        }
+
+        function removeTrack(trackId) {
+            selectedTracks = selectedTracks.filter(track => track.id !== trackId);
+            updateSelectedTracks();
+        }
+    </script>
+</body>
+</html>
