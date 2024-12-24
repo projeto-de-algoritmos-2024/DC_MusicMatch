@@ -63,6 +63,6 @@ O projeto utiliza:
 ## Apresentação Vídeo
 
 <a href="https://youtu.be/xn90uF7eCIk?si=v-bqYmDnZ8ZBYxH_">
- <img src="https://img.youtube.com/vi/xn90uF7eCIk?si=v-bqYmDnZ8ZBYxH_/0.jpg" alt="Título do Vídeo" width="240" height="180" border="10" />
+ <img src="https://img.youtube.com/vi/xn90uF7eCIk?si=v-bqYmDnZ8ZBYxH_/0.jpg" alt="MatchMusic"
 </a>
 
