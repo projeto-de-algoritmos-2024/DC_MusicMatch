@@ -62,7 +62,7 @@ O projeto utiliza:
 
 ## Apresentação Vídeo
 
-<a href="https://www.youtube.com/watch?v=ID_DO_VIDEO">
- <img src="https://img.youtube.com/vi/ID_DO_VIDEO/0.jpg" alt="Título do Vídeo" width="240" height="180" border="10" />
+<a href="https://youtu.be/xn90uF7eCIk?si=v-bqYmDnZ8ZBYxH_">
+ <img src="https://img.youtube.com/vi/xn90uF7eCIk?si=v-bqYmDnZ8ZBYxH_/0.jpg" alt="Título do Vídeo" width="240" height="180" border="10" />
 </a>
 
